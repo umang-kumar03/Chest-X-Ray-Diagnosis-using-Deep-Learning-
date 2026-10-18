@@ -5,11 +5,11 @@ X-ray images using a custom TensorFlow/Keras CNN and Streamlit.
 
 ## Project Status
 
-- Python environment and package setup completed.
-- Dataset labels and image paths checked.
-- Class distribution graph generated.
-- Image quality checks, training, evaluation, and app development pending.
-
+- Dataset audit and patient-group split completed.
+- Shared preprocessing and batch loading verified.
+- Custom CNN trained with early stopping.
+- Saved best checkpoint validated and official test evaluated.
+- Streamlit application and deployment pending.
 ## Dataset
 
 Source: [COVIDx on Kaggle](https://www.kaggle.com/datasets/andyczhao/covidx-cxr2)
@@ -24,16 +24,23 @@ Verified counts from the attached label files:
 | Test | 200 | 200 | 400 |
 | Total | 14,192 | 16,194 | 30,386 |
 
-A patient-wise validation subset will be created from the official
-training split. The official test split will be reserved for final
+A patient-group validation subset was created from the deduplicated
+official training split. The official test split was used for final
 evaluation.
 
 ### Initial Checks
 
-- All labeled image paths exist.
-- No duplicate label rows or repeated filenames within either split.
-- No shared filenames or patient ID strings between train and test.
-- Image readability and duplicate image content checks are pending.
+- All 30,386 labeled images were successfully decoded.
+- Nine exact-file duplicate groups were found in the official
+  training split. Ten redundant copies were excluded from derived
+  manifests; original files were preserved.
+- The deduplicated training pool contains 29,976 images:
+  23,873 training and 6,103 validation images.
+- Training and validation share no constructed patient groups
+  or exact-file hashes.
+- No byte-identical files were shared between official train and test.
+- Near duplicates and unidentified patient relationships remain
+  possible; these checks do not establish complete absence of leakage.
 
 ## Dataset Exploration
 
@@ -46,14 +53,44 @@ evaluation.
 Python, TensorFlow/Keras, NumPy, pandas, OpenCV, scikit-learn,
 Matplotlib, Seaborn, and Streamlit.
 
-Development is performed in VS Code. Model training is planned
-on Kaggle using an available GPU.
+Development is performed in VS Code. Model training was completed
+on a Kaggle Tesla T4 GPU.
 
 ## Results
 
-Model training has not been completed. Accuracy, precision,
-recall, F1 score, and confusion matrix results will be added
-after evaluation.
+A custom CNN was trained using TensorFlow/Keras with training-only
+augmentation and class weights. Early stopping ended training after
+9 epochs. The checkpoint with the lowest validation loss was selected
+at epoch 4.
+
+The classification threshold was fixed at 0.5 before test evaluation.
+
+| Metric | Validation | Official test |
+| --- | ---: | ---: |
+| Images | 6,103 | 400 |
+| Accuracy | 89.91% | 78.50% |
+| Positive-class precision | 92.39% | 88.00% |
+| Positive-class recall | 88.64% | 66.00% |
+| Positive-class F1 | 90.47% | 75.43% |
+| ROC-AUC | 0.9572 | 0.9055 |
+
+### Official Test Confusion Matrix
+
+![Test confusion matrix](artifacts/results/test_confusion_matrix.png)
+
+Of 200 COVID-positive test images, 132 were detected and 68 were
+missed. Of 200 negative images, 182 were correctly classified
+and 18 were classified as positive.
+
+The validation-to-test performance gap indicates limited
+generalization on this test split. Its cause has not been established.
+These results do not establish clinical suitability.
+No baseline comparison has been performed to support a claim
+of reduced false negatives.
+
+[Validation metrics](artifacts/results/best_validation_metrics.json) ·
+[Test metrics](artifacts/results/test_metrics.json) ·
+[Classification report](artifacts/results/test_classification_report.csv)
 
 ## Intended Use
 
