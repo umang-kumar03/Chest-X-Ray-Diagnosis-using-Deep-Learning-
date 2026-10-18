@@ -43,3 +43,69 @@ def preprocess_image(
         pixels = np.asarray(image, dtype=np.float32) / 255.0
 
     return pixels[..., np.newaxis]
+
+
+LABEL_MAP = {"negative": 0, "positive": 1}
+
+
+def make_dataset(
+    table,
+    image_dir: str | Path,
+    batch_size: int = 32,
+    training_mode: bool = False,
+    seed: int = 42,
+):
+    """Build batches using the shared image preprocessing function."""
+    import tensorflow as tf
+
+    if table.empty:
+        raise ValueError("The image manifest is empty.")
+
+    if batch_size < 1:
+        raise ValueError("batch_size must be positive.")
+
+    image_dir = Path(image_dir)
+    labels = table["label"].map(LABEL_MAP)
+
+    if labels.isna().any():
+        raise ValueError("The manifest contains unknown class labels.")
+
+    paths = [
+        str(image_dir / filename)
+        for filename in table["filename"]
+    ]
+
+    def load_image(path):
+        filename = path.numpy().decode("utf-8")
+        return preprocess_image(filename)
+
+    def prepare_example(path, label):
+        image = tf.py_function(
+            func=load_image,
+            inp=[path],
+            Tout=tf.float32,
+        )
+        image.set_shape((IMAGE_SIZE[1], IMAGE_SIZE[0], 1))
+
+        label = tf.reshape(tf.cast(label, tf.float32), (1,))
+        return image, label
+
+    dataset = tf.data.Dataset.from_tensor_slices(
+        (paths, labels.to_numpy(dtype=np.float32))
+    )
+
+    # Shuffle filenames before decoding to limit memory use.
+    if training_mode:
+        dataset = dataset.shuffle(
+            buffer_size=len(table),
+            seed=seed,
+            reshuffle_each_iteration=True,
+        )
+
+    dataset = dataset.map(
+        prepare_example,
+        num_parallel_calls=2,
+        deterministic=True,
+    )
+
+    return dataset.batch(batch_size).prefetch(1)
