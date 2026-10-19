@@ -107,8 +107,18 @@ and 18 were classified as positive.
 The validation-to-test performance gap indicates limited
 generalization on this test split. Its cause has not been established.
 These results do not establish clinical suitability.
-No baseline comparison has been performed to support a claim
-of reduced false negatives.
+
+An exploratory single-seed comparison on the validation split found
+that a baseline trained without augmentation or class weights
+outperformed the original model: 96.44% validation accuracy and
+111 false negatives, compared with 89.91% and 375 false negatives.
+
+This experiment does not support a false-negative reduction claim.
+It does not isolate the individual effects of augmentation and
+class weighting. Baseline official test performance is unknown.
+The application continues to use the original evaluated checkpoint.
+
+[Baseline comparison notebook](notebooks/05_baseline_comparison.ipynb)
 
 [Validation metrics](artifacts/results/best_validation_metrics.json) ·
 [Test metrics](artifacts/results/test_metrics.json) ·

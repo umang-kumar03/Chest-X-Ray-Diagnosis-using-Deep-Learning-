@@ -142,7 +142,15 @@ independent final performance estimate.
 - The application does not detect or reject non-X-ray images.
 - Source-specific artifacts, acquisition differences, and other
   confounding factors have not been ruled out.
-- No baseline comparison supports a claim of reduced false negatives.
+- An exploratory single-seed validation comparison found that a
+  baseline without augmentation or class weights produced 111
+  false negatives, compared with 375 for the original model.
+  This does not support a false-negative reduction claim.
+- Both checkpoints were selected using validation loss. This
+  comparison is not an independent test-set result and does not
+  isolate augmentation from class-weight effects.
+- Baseline official test performance remains unknown. The application
+  still uses the original evaluated checkpoint.
 - No prospective or clinical validation has been performed.
 
 ## Software and Reproducibility
