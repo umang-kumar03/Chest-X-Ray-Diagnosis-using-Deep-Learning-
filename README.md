@@ -9,7 +9,10 @@ X-ray images using a custom TensorFlow/Keras CNN and Streamlit.
 - Shared preprocessing and batch loading verified.
 - Custom CNN trained with early stopping.
 - Saved best checkpoint validated and official test evaluated.
-- Streamlit application and deployment pending.
+- Streamlit application tested locally with image upload,
+  prediction, and saved evaluation results.
+- Public deployment pending.
+
 ## Dataset
 
 Source: [COVIDx on Kaggle](https://www.kaggle.com/datasets/andyczhao/covidx-cxr2)
@@ -91,6 +94,29 @@ of reduced false negatives.
 [Validation metrics](artifacts/results/best_validation_metrics.json) ·
 [Test metrics](artifacts/results/test_metrics.json) ·
 [Classification report](artifacts/results/test_classification_report.csv)
+
+## Run the Streamlit App
+
+Place the trained checkpoint at:
+
+```text
+artifacts/models/best_model.keras
+```
+
+Model weights are not included in this repository.
+
+After installing the project dependencies and package, run
+this command from the project root:
+
+```bash
+python -m streamlit run app.py
+```
+
+The app accepts PNG/JPEG files up to 10 MB and displays a model
+score with a fixed classification threshold of 0.5.
+
+It does not verify whether an uploaded image is a chest X-ray.
+Scores are not calibrated medical probabilities.
 
 ## Intended Use
 
