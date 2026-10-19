@@ -2,6 +2,11 @@
 
 [![Python Tests](https://github.com/umang-kumar03/Chest-X-Ray-Diagnosis-using-Deep-Learning-/actions/workflows/tests.yml/badge.svg)](https://github.com/umang-kumar03/Chest-X-Ray-Diagnosis-using-Deep-Learning-/actions/workflows/tests.yml)
 
+[Open Live Showcase](https://umang-chest-xray-showcase.streamlit.app/)
+
+The public showcase displays recorded results and training curves.
+Interactive image classification is available locally.
+
 An educational project for COVID-19 classification from chest
 X-ray images using a custom TensorFlow/Keras CNN and Streamlit.
 
@@ -13,7 +18,7 @@ X-ray images using a custom TensorFlow/Keras CNN and Streamlit.
 - Saved best checkpoint validated and official test evaluated.
 - Streamlit application tested locally with image upload,
   prediction, and saved evaluation results.
-- Public deployment pending.
+- Public showcase deployed; interactive inference remains local.
 
 ## Dataset
 

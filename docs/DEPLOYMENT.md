@@ -3,7 +3,12 @@
 ## Current Status
 
 The Streamlit application has been tested locally on Windows.
-Public deployment has not yet been completed.
+The public showcase is deployed at:
+https://umang-chest-xray-showcase.streamlit.app/
+
+Public access and recorded-result displays were checked in an
+incognito browser. Interactive inference remains available locally.
+Model weights are not included in the public deployment.
 
 Verified locally:
 - Trained checkpoint loading.
@@ -120,7 +125,8 @@ failure observed with the previously installed version.
 
 ## Public Deployment Requirements
 
-Public deployment remains pending.
+The public showcase is deployed. Public interactive inference
+remains pending review of applicable source terms.
 
 Before deployment:
 
@@ -144,3 +150,14 @@ Non-X-ray images can also receive predictions.
 The model missed 68 of 200 positive official test images.
 It is not validated for clinical diagnosis and must not guide
 medical decisions.
+
+## Public Demo Permission Review
+
+Clarification requested from BIMCV regarding a free educational
+inference demo and trained-model sharing:
+
+https://github.com/BIMCV-CSUSP/BIMCV-COVID-19/issues/39
+
+The request itself does not establish permission.
+Public launch remains pending clarification and review of
+the other applicable source terms. 
