@@ -61,6 +61,18 @@ Matplotlib, Seaborn, and Streamlit.
 Development is performed in VS Code. Model training was completed
 on a Kaggle Tesla T4 GPU.
 
+## Training Curves
+
+![Training and validation accuracy](artifacts/results/accuracy_curve.png)
+
+![Training and validation loss](artifacts/results/loss_curve.png)
+
+The checkpoint was selected by minimum validation loss at epoch 4.
+Early stopping ended training after 9 epochs.
+
+[Recorded training history](artifacts/results/training_history.csv)
+
+
 ## Results
 
 A custom CNN was trained using TensorFlow/Keras with training-only
