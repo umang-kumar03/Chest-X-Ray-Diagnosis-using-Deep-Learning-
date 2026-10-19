@@ -125,6 +125,13 @@ score with a fixed classification threshold of 0.5.
 It does not verify whether an uploaded image is a chest X-ray.
 Scores are not calibrated medical probabilities.
 
+## Documentation
+
+- [Dataset setup and audit](docs/DATASET.md)
+- [Model card and limitations](docs/MODEL_CARD.md)
+- [Application setup and deployment](docs/DEPLOYMENT.md)
+
+
 ## Intended Use
 
 For education and research only. This project is not validated
