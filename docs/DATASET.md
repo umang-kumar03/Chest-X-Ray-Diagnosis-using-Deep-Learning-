@@ -53,6 +53,24 @@ test.txt
 
 Verify these checksums before reusing saved split manifests.
 
+## Training Data Sources
+
+Source names and counts recorded from the original training labels:
+
+| Source label | Images |
+| --- | ---: |
+| stonybrook | 13,636 |
+| rsna | 13,588 |
+| sirm | 943 |
+| ricord | 896 |
+| cohen | 567 |
+| bimcv | 200 |
+| actmed | 132 |
+| fig1 | 24 |
+| Total | 29,986 |
+
+These are counts before exact-file deduplication.
+
 ## Audit Findings
 
 - All 30,386 labeled image files existed and were successfully decoded.
