@@ -3,6 +3,7 @@
 import json
 import tempfile
 from pathlib import Path
+import os
 
 import streamlit as st
 from PIL import Image, UnidentifiedImageError
@@ -28,11 +29,12 @@ st.warning(
     "for clinical diagnosis and must not guide medical decisions."
 )
 
-st.info(
-    "Upload a chest X-ray in PNG or JPEG format. The application "
-    "does not verify whether an uploaded image is a chest X-ray. "
-    "Other images can also receive a prediction."
-)
+if os.getenv("SHOWCASE_MODE") != "1" and MODEL_PATH.is_file():
+    st.info(
+        "Upload a chest X-ray in PNG or JPEG format. The application "
+        "does not verify whether an uploaded image is a chest X-ray. "
+        "Other images can also receive a prediction."
+    )
 
 
 @st.cache_resource
@@ -77,6 +79,37 @@ with st.expander("Official test results"):
         )
     else:
         st.info("Saved test metrics are not available.")
+
+
+# Show project results without requiring publicly hosted model weights.
+if os.getenv("SHOWCASE_MODE") == "1" or not MODEL_PATH.is_file():
+    st.subheader("Project Showcase")
+    st.info(
+        "Interactive inference is currently available locally. "
+        "This public showcase displays recorded project results."
+    )
+
+    st.write(
+        "Custom CNN: three convolution blocks with 32, 64, and "
+        "128 filters, global average pooling, a dense layer, "
+        "dropout, and a sigmoid output. Total parameters: 101,665."
+    )
+
+    for filename, caption in [
+        ("accuracy_curve.png", "Recorded training and validation accuracy"),
+        ("loss_curve.png", "Recorded training and validation loss"),
+        ("app_screenshot.png", "Locally tested Streamlit application"),
+    ]:
+        path = RESULTS_DIR / filename
+
+        if path.is_file():
+            with Image.open(path) as image:
+                st.image(
+                    image.convert("RGB"),
+                    caption=caption,
+                )
+
+    st.stop()
 
 
 uploaded = st.file_uploader(
