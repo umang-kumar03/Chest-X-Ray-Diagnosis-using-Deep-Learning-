@@ -1,5 +1,7 @@
 # Chest X-Ray Diagnosis using Deep Learning
 
+[![Python Tests](https://github.com/umang-kumar03/Chest-X-Ray-Diagnosis-using-Deep-Learning-/actions/workflows/tests.yml/badge.svg)](https://github.com/umang-kumar03/Chest-X-Ray-Diagnosis-using-Deep-Learning-/actions/workflows/tests.yml)
+
 An educational project for COVID-19 classification from chest
 X-ray images using a custom TensorFlow/Keras CNN and Streamlit.
 
