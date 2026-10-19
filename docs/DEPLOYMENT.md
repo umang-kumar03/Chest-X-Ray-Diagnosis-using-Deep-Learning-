@@ -53,6 +53,28 @@ python -m pip check
 
 If the virtual environment already exists, activate it and reuse it.
 
+## Checkpoint Integrity
+
+The application verifies the model file's SHA-256 before loading it.
+
+Expected checkpoint checksum:
+
+```text
+806d01759ea3f389d1b052b5f2a5ae5bb6e9bd0d3a4931cb328726c0227530c9
+```
+
+A different file is rejected with a checksum mismatch error.
+Do not replace the expected checksum merely to accept an
+unverified checkpoint.
+
+For local source development, use an editable installation:
+
+```bash
+python -m pip install -e .
+```
+
+Restart Streamlit after changing model-loading code.
+
 ## Run Locally
 
 From the repository root, with the virtual environment active:
