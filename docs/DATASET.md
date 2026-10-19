@@ -150,8 +150,14 @@ Private inputs are not automatically available to other users.
 Regenerate manifests or supply an authorized copy as needed.
 
 Exact split reproduction depends on compatible package versions
-and matching input ordering. Fresh-account end-to-end reproduction
-has not yet been verified.
+and matching input ordering.
+
+The scikit-learn version used for the original split was not recorded.
+To reproduce the exact split, compare regenerated manifests with the
+privately retained original manifests; matching split counts alone
+does not prove identical membership.
+
+Fresh-account end-to-end reproduction has not yet been verified.
 
 ## Local Data
 
