@@ -7,8 +7,12 @@ The public showcase is deployed at:
 https://umang-chest-xray-showcase.streamlit.app/
 
 Public access and recorded-result displays were checked in an
-incognito browser. Interactive inference remains available locally.
-Model weights are not included in the public deployment.
+incognito browser. Interactive inference is available in the public application.
+On first prediction, the app downloads the original evaluated
+checkpoint from GitHub Releases and verifies its SHA-256 before loading.
+
+Model weights are not tracked in Git; they are distributed as
+the model-v1 release asset.
 
 Verified locally:
 - Trained checkpoint loading.
@@ -151,13 +155,18 @@ The model missed 68 of 200 positive official test images.
 It is not validated for clinical diagnosis and must not guide
 medical decisions.
 
-## Public Demo Permission Review
+## Public Deployment and Usage Terms
 
-Clarification requested from BIMCV regarding a free educational
-inference demo and trained-model sharing:
+The public application supports interactive image classification.
+Checkpoint download, checksum verification, and prediction were
+functionally tested on Streamlit Community Cloud.
 
+The project owner confirmed that applicable terms were clarified
+before enabling public inference. This confirmation has not been
+independently verified here.
+
+Related clarification request:
 https://github.com/BIMCV-CSUSP/BIMCV-COVID-19/issues/39
 
-The request itself does not establish permission.
-Public launch remains pending clarification and review of
-the other applicable source terms. 
+Dataset attribution and applicable source terms remain relevant.
+Deployment does not establish clinical suitability.

@@ -4,8 +4,8 @@
 
 [Open Live Showcase](https://umang-chest-xray-showcase.streamlit.app/)
 
-The public showcase displays recorded results and training curves.
-Interactive image classification is available locally.
+The public application supports image upload and classification
+and displays recorded evaluation results.
 
 An educational project for COVID-19 classification from chest
 X-ray images using a custom TensorFlow/Keras CNN and Streamlit.
@@ -18,7 +18,8 @@ X-ray images using a custom TensorFlow/Keras CNN and Streamlit.
 - Saved best checkpoint validated and official test evaluated.
 - Streamlit application tested locally with image upload,
   prediction, and saved evaluation results.
-- Public showcase deployed; interactive inference remains local.
+- Public Streamlit application deployed with image upload,
+  checksum-verified checkpoint download, and interactive inference.
 
 ## Dataset
 
