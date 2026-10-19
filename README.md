@@ -95,6 +95,11 @@ of reduced false negatives.
 [Test metrics](artifacts/results/test_metrics.json) ·
 [Classification report](artifacts/results/test_classification_report.csv)
 
+## Application Preview
+
+![Streamlit application](artifacts/results/app_screenshot.png)
+
+
 ## Run the Streamlit App
 
 Place the trained checkpoint at:
