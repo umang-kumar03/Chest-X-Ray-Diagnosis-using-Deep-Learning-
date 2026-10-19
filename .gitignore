@@ -36,3 +36,6 @@ artifacts/models/*
 .idea/
 .DS_Store
 Thumbs.db
+# Packaging outputs
+build/
+dist/
