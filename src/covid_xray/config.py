@@ -35,3 +35,8 @@ if __name__ == "__main__":
     print(f"Dataset: {DATASET_NAME} — {DATASET_VERSION}")
     print(f"Image size: {IMAGE_SIZE}")
     print(f"Maximum epochs: {MAX_EPOCHS}")
+    
+# SHA-256 of the evaluated best checkpoint.
+MODEL_SHA256 = (
+    "806d01759ea3f389d1b052b5f2a5ae5bb6e9bd0d3a4931cb328726c0227530c9"
+)    
