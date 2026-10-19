@@ -163,7 +163,13 @@ prediction equivalence across environments has not been verified.
 
 The repository contains source code, executed notebooks,
 evaluation reports, and software tests. Private split manifests
-and trained weights are not included in the Git repository.
+and model binaries are not tracked in Git.
+
+The original evaluated checkpoint is available as a GitHub Release asset:
+https://github.com/umang-kumar03/Chest-X-Ray-Diagnosis-using-Deep-Learning-/releases/tag/model-v1
+
+The application verifies the checkpoint's SHA-256 before loading it.
+The later baseline model is not the checkpoint used by the application.
 
 Dataset and source-image licenses govern data usage.
 This model card does not grant permission to redistribute them.
