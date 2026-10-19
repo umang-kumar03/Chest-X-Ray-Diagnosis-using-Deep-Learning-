@@ -8,10 +8,11 @@ import os
 import streamlit as st
 from PIL import Image, UnidentifiedImageError
 
-from covid_xray.config import PROJECT_ROOT
+
 from covid_xray.inference import load_model, predict_image
 
-
+# Resolve app assets relative to the repository's entry-point file.
+PROJECT_ROOT = Path(__file__).resolve().parent
 MODEL_PATH = PROJECT_ROOT / "artifacts/models/best_model.keras"
 RESULTS_DIR = PROJECT_ROOT / "artifacts/results"
 
