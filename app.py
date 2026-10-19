@@ -4,6 +4,7 @@ import json
 import tempfile
 from pathlib import Path
 import os
+from covid_xray.model_download import ensure_model
 
 import streamlit as st
 from PIL import Image, UnidentifiedImageError
@@ -30,7 +31,7 @@ st.warning(
     "for clinical diagnosis and must not guide medical decisions."
 )
 
-if os.getenv("SHOWCASE_MODE") != "1" and MODEL_PATH.is_file():
+if os.getenv("SHOWCASE_MODE") != "1":
     st.info(
         "Upload a chest X-ray in PNG or JPEG format. The application "
         "does not verify whether an uploaded image is a chest X-ray. "
@@ -40,7 +41,8 @@ if os.getenv("SHOWCASE_MODE") != "1" and MODEL_PATH.is_file():
 
 @st.cache_resource
 def get_model():
-    return load_model(MODEL_PATH)
+    verified_path = ensure_model(MODEL_PATH)
+    return load_model(verified_path)
 
 
 with st.expander("Official test results"):
@@ -83,7 +85,7 @@ with st.expander("Official test results"):
 
 
 # Show project results without requiring publicly hosted model weights.
-if os.getenv("SHOWCASE_MODE") == "1" or not MODEL_PATH.is_file():
+if os.getenv("SHOWCASE_MODE") == "1":
     st.subheader("Project Showcase")
     st.info(
         "Interactive inference is currently available locally. "
@@ -145,13 +147,7 @@ if uploaded is not None:
         st.stop()
 
     if st.button("Classify image", type="primary"):
-        if not MODEL_PATH.is_file():
-            st.error(
-                "Trained model missing. Place best_model.keras "
-                "inside artifacts/models/."
-            )
-            st.stop()
-
+        
         try:
             with st.spinner("Processing image..."):
                 model = get_model()
