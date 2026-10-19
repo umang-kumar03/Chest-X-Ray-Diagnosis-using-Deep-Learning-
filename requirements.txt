@@ -1,9 +1,2 @@
-tensorflow>=2.16,<2.18
-numpy>=1.26,<2
-pandas>=2.2,<3
-opencv-python-headless>=4.9,<4.12
-pillow>=10,<12
-matplotlib>=3.8,<4
-seaborn>=0.13,<0.14
-scikit-learn>=1.4,<1.7
-streamlit==1.45.1
+# Install the project and its declared dependencies.
+.
